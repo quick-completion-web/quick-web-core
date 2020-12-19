@@ -30,8 +30,12 @@ public class TypeConverterUtils {
         converters.put(Date.class, DateUtils::parse);
     }
 
-    public static <T> T convert(Class<T> type, String origin){
-        return type.cast(converters.getOrDefault(type,o -> o).convert(origin));
+    public static Object convert(Class<?> type, String origin){
+        try{
+            return type.cast(converters.getOrDefault(type,o -> o).convert(origin));
+        }catch (Exception e){
+            return origin;
+        }
     }
 
 }
