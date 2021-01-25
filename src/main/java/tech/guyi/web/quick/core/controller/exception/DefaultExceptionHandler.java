@@ -8,6 +8,7 @@ import tech.guyi.web.quick.core.configuration.response.ResponseExceptionHandlerC
 import tech.guyi.web.quick.core.configuration.response.ResponseMessageConfiguration;
 import tech.guyi.web.quick.core.controller.ResponseContent;
 import tech.guyi.web.quick.core.controller.ResponseEntities;
+import tech.guyi.web.quick.core.exception.NoAuthorizationException;
 
 import javax.annotation.Resource;
 
@@ -30,6 +31,11 @@ public class DefaultExceptionHandler {
         }
         return ResponseEntities.fail(StringUtils.isEmpty(e.getMessage()) ?
                 messageConfiguration.getServerErrorMessage() : e.getMessage());
+    }
+
+    @ExceptionHandler(NoAuthorizationException.class)
+    public ResponseEntity<ResponseContent<Void>> onNoAuthorizationException(){
+        return ResponseEntities._401();
     }
 
 }

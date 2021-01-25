@@ -25,8 +25,8 @@ public class AutoConfiguration implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         if (corsConfiguration.isEnable()){
             registry.addMapping(corsConfiguration.getMapping())
+                    .allowedOriginPatterns("*")
                     .allowCredentials(corsConfiguration.isCredentials())
-                    .allowedOrigins(corsConfiguration.getOrigins().toArray(new String[0]))
                     .allowedMethods(corsConfiguration.getMethods().toArray(new String[0]))
                     .allowedHeaders(corsConfiguration.getHeaders().toArray(new String[0]))
                     .exposedHeaders(corsConfiguration.getExposedHeaders().toArray(new String[0]));
